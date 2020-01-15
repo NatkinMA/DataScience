@@ -1,4 +1,6 @@
 def calculate():
+    number_1 = int(input('Please enter the first number: '))
+    number_2 = int(input('Please enter the second number: '))
     operation = input('''
     Please type in the math operation you would like to complete:
     + for addition
@@ -6,8 +8,6 @@ def calculate():
     * for multiplication
     / for division
     ''')
-    number_1 = int(input('Please enter the first number: '))
-    number_2 = int(input('Please enter the second number: '))
     if operation == '+':
         print('{} + {} = '.format(number_1, number_2))
         print(number_1 + number_2)
@@ -25,10 +25,9 @@ def calculate():
             print('ZeroDivisionError: division by zero')
     else:
         print('You have not typed a valid operator, please run the program again.')
-    again()
 
 
-def again():
+while True:
     calc_again = input('''
     Do you want to calculate again?
     Please type Y for YES or N for NO.
@@ -37,8 +36,4 @@ def again():
         calculate()
     elif calc_again.upper() == 'N':
         print('See you later.')
-    else:
-        again()
-
-
-calculate()
+        break
