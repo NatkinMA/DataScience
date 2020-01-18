@@ -10,34 +10,36 @@
 '''
 
 
-def replace_points(str):
-    return str.replace('.', ' ')
+def replace_points(str_line):
+    return str_line.replace('.', ' ')
 
 
-def replace_commas(str):
-    return str.replace(',', ' ')
+def replace_commas(str_line):
+    return str_line.replace(',', ' ')
 
 
-def replace_doubleSpace(str):
-    return str.replace('  ', ' ')
+def replace_double_space(str_line):
+    return str_line.replace('  ', ' ')
 
 
-def lower_case(str):
-    return str.lower()
+def lower_case(str_line):
+    return str_line.lower()
 
 
-try:
-    input_file = open('data.txt', 'r')
-    output_file = open('output.txt', 'w')
+if __name__ == '__main__':
+    try:
+        input_file = open('data.txt', 'r')
+        output_file = open('output.txt', 'w')
 
-    for line in input_file.readlines():
-        line = replace_points(line)
-        line = replace_commas(line)
-        line = replace_doubleSpace(line)
-        line = lower_case(line)
-        output_file.write(line)
+        for line in input_file.readlines():
 
-    input_file.close()
-    output_file.close()
-except FileNotFoundError:
-    print('FileNotFoundError: data.txt not found')
+            line = replace_points(line)
+            line = replace_commas(line)
+            line = replace_double_space(line)
+            line = lower_case(line)
+            output_file.write(line)
+
+        input_file.close()
+        output_file.close()
+    except FileNotFoundError:
+        print('FileNotFoundError: data.txt not found')
