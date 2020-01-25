@@ -35,35 +35,40 @@ import timeit
 import sys
 
 
-def time_for_find_needles_in_stack(stack, needles):
+def time_for_find_needle_in_stack(stack, needle):
     time_start = timeit.default_timer()
-    i = 0
-    for needle in needles:
-        for element in stack:
-            if needle == element:
-                break
+    for element in stack:
+        if element == needle:
+            break
     time_end = timeit.default_timer() - time_start
-    return sys.getsizeof(stack), time_end
+    print('Stack size:', sys.getsizeof(stack), 'Time: ', time_end)
+
+
+def time_for_find_needles_in_stack(stack, needles):
+    for needle in needles:
+        time_for_find_needle_in_stack(stack, needle)
 
 
 def get_time_for_find_needles_in_stacks(stack_size, needles_size):
     stack_list = [random.random() for i in range(stack_size)]
     stack_tuple = tuple(stack_list)
     stack_dict = dict(zip(stack_list, [1]*len(stack_list)))
+
     needles = []
     for i in range(needles_size):
         if i <= 500:
-            k = random.randint(0, len(stack_list))
+            k = random.randint(0, (stack_size - 1))
             needles.append(stack_list[k])
         else:
             needles.append(random.uniform(1, 2))
-    return time_for_find_needles_in_stack(stack_list, needles), \
-           time_for_find_needles_in_stack(stack_tuple, needles), \
-           time_for_find_needles_in_stack(stack_dict, needles)
+
+    time_for_find_needles_in_stack(stack_list, needles)
+    time_for_find_needles_in_stack(stack_tuple, needles)
+    time_for_find_needles_in_stack(stack_dict, needles)
 
 
 if __name__ == '__main__':
-    print(get_time_for_find_needles_in_stacks(1000, 1000))
-    print(get_time_for_find_needles_in_stacks(10000, 1000))
-    print(get_time_for_find_needles_in_stacks(100000, 1000))
-    print(get_time_for_find_needles_in_stacks(1000000, 1000))
+    get_time_for_find_needles_in_stacks(1000, 1000)
+    get_time_for_find_needles_in_stacks(10000, 1000)
+    get_time_for_find_needles_in_stacks(100000, 1000)
+    get_time_for_find_needles_in_stacks(1000000, 1000)
